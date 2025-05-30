@@ -4,12 +4,14 @@
 ![Jitsi](https://img.shields.io/badge/Jitsi-Meet-blue)
 ![SSL](https://img.shields.io/badge/SSL-Let's%20Encrypt-green)
 ![Security](https://img.shields.io/badge/Security-Authentication-lightgrey)
+![DigitalOcean](https://img.shields.io/badge/DigitalOcean-Cloud-blue)
+![METUnic](https://img.shields.io/badge/METUnic-Domain-orange)
 
-A comprehensive video conferencing solution implementing Jitsi Meet on Ubuntu 22.04, featuring secure authentication, high-quality video streaming, and robust meeting management capabilities.
+A comprehensive video conferencing solution implementing Jitsi Meet on Ubuntu 22.04, featuring secure authentication, high-quality video streaming, and robust meeting management capabilities. This project is hosted on DigitalOcean and uses METUnic for domain management.
 
 ## 📋 Overview
 
-This project implements a self-hosted video conferencing system using Jitsi Meet, providing a secure and reliable platform for online meetings, webinars, and virtual classrooms. The system features advanced security measures, high-quality video streaming, and comprehensive meeting management tools.
+This project implements a self-hosted video conferencing system using Jitsi Meet, providing a secure and reliable platform for online meetings, webinars, and virtual classrooms. The system is deployed on DigitalOcean's cloud infrastructure and uses METUnic for domain management, ensuring high availability and professional domain handling.
 
 ## 🎯 Project Goals
 
@@ -18,6 +20,8 @@ This project implements a self-hosted video conferencing system using Jitsi Meet
 - Set up user authentication system
 - Enable meeting recording capabilities
 - Ensure robust and reliable operation in production environment
+- Implement cloud-based hosting solution
+- Establish professional domain management
 
 ## 📊 Key Features
 
@@ -27,6 +31,7 @@ This project implements a self-hosted video conferencing system using Jitsi Meet
 - Screen sharing capabilities
 - Meeting recording options
 - Customizable meeting rooms
+- Mobile device support
 
 ### Security Features
 - SSL/TLS encryption
@@ -34,6 +39,7 @@ This project implements a self-hosted video conferencing system using Jitsi Meet
 - Guest access control
 - Meeting password protection
 - Rate limiting implementation
+- Cloud-based security measures
 
 ### Meeting Management
 - Meeting scheduling system
@@ -41,6 +47,7 @@ This project implements a self-hosted video conferencing system using Jitsi Meet
 - Recording storage
 - Chat moderation
 - File sharing capabilities
+- Cloud-based storage solutions
 
 ## 🛠️ Technologies Used
 
@@ -50,64 +57,80 @@ This project implements a self-hosted video conferencing system using Jitsi Meet
 - Prosody XMPP Server
 - Nginx Web Server
 - PostgreSQL Database
+- DigitalOcean Cloud Platform
+- METUnic Domain Services
 
 ## 📈 Project Structure
 
 1. **Server Setup**
-   - Ubuntu 22.04 installation
+   - Ubuntu 22.04 installation on DigitalOcean
    - System updates and dependencies
    - Network configuration
+   - Cloud infrastructure setup
 
 2. **Jitsi Meet Installation**
    - Repository configuration
    - Package installation
    - SSL certificate setup
+   - Domain configuration via METUnic
 
 3. **Security Implementation**
    - Authentication system
    - SSL configuration
    - Firewall setup
+   - Cloud security measures
 
 4. **Meeting Management**
    - User administration
    - Meeting scheduling
    - Recording management
+   - Cloud storage integration
 
 ## 💻 Installation
 
-1. Update system packages:
+1. Set up DigitalOcean Droplet:
+   - Create new Ubuntu 22.04 droplet
+   - Configure firewall rules
+   - Set up SSH access
+
+2. Configure Domain (METUnic):
+   - Set up DNS records
+   - Configure domain forwarding
+   - Enable SSL certificate
+
+3. Update system packages:
 ```bash
 apt update -y
 apt upgrade -y
 ```
 
-2. Install required dependencies:
+4. Install required dependencies:
 ```bash
 apt install curl gnupg2 wget -y
 ```
 
-3. Add Jitsi Meet repository:
+5. Add Jitsi Meet repository:
 ```bash
 curl https://download.jitsi.org/jitsi-key.gpg.key -o jitsi-key.gpg.key
 gpg --output /usr/share/keyrings/jitsi-key.gpg --dearmor jitsi-key.gpg.key
 ```
 
-4. Create Jitsi repository file:
+6. Create Jitsi repository file:
 ```bash
 echo "deb [signed-by=/usr/share/keyrings/jitsi-key.gpg] https://download.jitsi.org stable/" | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
 ```
 
-5. Install Jitsi Meet:
+7. Install Jitsi Meet:
 ```bash
 apt install jitsi-meet -y
 ```
 
-6. Configure SSL certificate:
+8. Configure SSL certificate:
 - Choose Let's Encrypt during installation
-- Enter your domain name
+- Enter your METUnic domain name
 - Provide email address for notifications
 
-7. Enable authentication:
+9. Enable authentication:
 ```bash
 nano /etc/prosody/conf.avail/your-domain.cfg.lua
 ```
@@ -116,12 +139,12 @@ Add authentication configuration:
 authentication = "internal_plain"
 ```
 
-8. Create admin user:
+10. Create admin user:
 ```bash
 prosodyctl register admin your-domain.com yourpassword
 ```
 
-9. Restart services:
+11. Restart services:
 ```bash
 systemctl restart prosody.service jicofo.service jitsi-videobridge2.service
 ```
@@ -133,6 +156,8 @@ systemctl restart prosody.service jicofo.service jitsi-videobridge2.service
 - High-quality video streaming capabilities
 - Robust meeting management features
 - Comprehensive security measures
+- Efficient cloud-based hosting solution
+- Professional domain management
 
 ## 📊 System Requirements
 
@@ -140,8 +165,10 @@ systemctl restart prosody.service jicofo.service jitsi-videobridge2.service
 - Minimum 4GB RAM
 - 2 CPU cores
 - 20GB storage space
-- Valid domain name
+- Valid domain name (METUnic)
 - Static IP address
+- DigitalOcean account
+- SSL certificate
 
 ## 👤 Author
 
@@ -149,7 +176,9 @@ Mert Ali Celik
 
 ## 🙏 Acknowledgments
 
-- Jitsi Meet development team
+- [Jitsi Meet](https://github.com/jitsi/jitsi-meet) development team
+- [DigitalOcean](https://www.digitalocean.com/) for cloud hosting
+- [METUnic](https://app.metunic.com.tr/client/login/) for domain services
 - Ubuntu community
 - Let's Encrypt for SSL certificates
 - Open-source community
@@ -158,6 +187,8 @@ Mert Ali Celik
 
 For detailed documentation, please refer to:
 - [Jitsi Meet Documentation](https://jitsi.github.io/handbook/)
+- [DigitalOcean Documentation](https://docs.digitalocean.com/)
+- [METUnic Documentation](https://app.metunic.com.tr/client/login/)
 - [Ubuntu Server Guide](https://ubuntu.com/server/docs)
 - [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
 
@@ -166,3 +197,5 @@ For detailed documentation, please refer to:
 For technical support or questions, please contact:
 - Email: [Your Email]
 - GitHub Issues: [Project Issues Page]
+- DigitalOcean Support: [DigitalOcean Support Portal]
+- METUnic Support: [METUnic Support Portal]
